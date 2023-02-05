@@ -56,3 +56,8 @@ void board::set_player_position(int x, int y, char player)
 {
 	play_field[x][y] = player;
 }
+
+char board::get_char_at_board(int x, int y)
+{
+	return play_field[x][y];
+}

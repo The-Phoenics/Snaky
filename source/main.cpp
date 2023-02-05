@@ -1,8 +1,6 @@
 #include <iostream>
 #include "./headers/board.h"
 #include "./headers/sprite.h"
-#include "stdio.h"
-
 
 int main()
 {
@@ -11,12 +9,12 @@ int main()
 
 	while (true)
 	{
+		system("cls");
 		b1.print_field();
 		s1.sprite_movement(b1);
 	}
 
 }
-
 
 
 void sprite_spawn(board& obj)

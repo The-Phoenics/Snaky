@@ -7,6 +7,7 @@ public:
 	board(int r, int c);
 	void const print_field();
 	void set_player_position(int x, int y, char player);
+	char get_char_at_board(int x, int y);
 
 private:
 	void initialize_field();
