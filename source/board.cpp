@@ -1,11 +1,49 @@
 #include "./headers/board.h"
 #include <iostream>
+#include <Windows.h>
 
+void board::move_cursor(int t_x, int t_y)
+{
+	COORD COORDINATE;
+	COORDINATE.X = t_x + 25;
+	COORDINATE.Y = t_y;
+
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORDINATE);
+}
 
 board::board(int r, int c) : row(r), column(c)  
 {
 	initialize_field();
 }
+
+// copy the play_field into m_Buffer
+void board::copy_into_buffer()
+{
+	for (int i = 0; i < 25; i++)
+		for (int j = 0; j < 50; j++)
+		{
+			m_Buffer[i][j] = play_field[i][j];
+		}
+}
+
+// compare both buffers and move the cursor
+void board::screen_manager()
+{
+	for (int i = 0; i < 25; i++)
+		for (int j = 0; j < 50; j++)
+		{
+			if (m_Buffer[i][j] == play_field[i][j]) { continue; }
+			
+			move_cursor(j, i);
+
+			if (play_field[i][j] == '#') { continue; }
+
+			std::cout << play_field[i][j];
+
+			move_cursor(-25, 25);
+		}
+}
+
 
 void const board::print_field()
 {
@@ -23,6 +61,8 @@ void const board::print_field()
 			std::cout << play_field[i][j];
 		}
 		std::cout << std::endl;
+
+		std::cout.flush();
 	}
 }
 
@@ -60,4 +100,13 @@ void board::set_player_position(int x, int y, char player)
 char board::get_char_at_board(int x, int y)
 {
 	return play_field[x][y];
+}
+
+void board::Update_buffer()
+{
+	for (int i = 0; i < 25; i++)
+		for (int j = 0; j < 50; j++)
+		{
+			memset(m_Buffer, play_field[i][j], 1);
+		}
 }

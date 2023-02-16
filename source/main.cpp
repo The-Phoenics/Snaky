@@ -1,23 +1,21 @@
 #include <iostream>
+#include <ostream>
 #include "./headers/board.h"
 #include "./headers/sprite.h"
 
 int main()
 {
 	board b1(25, 50);
-	sprite s1('X', 20, 15, b1);
+	sprite s1('X', 20, 15, b1);  // put X at 20,15 index
+
+	b1.copy_into_buffer();
+	b1.print_field();
 
 	while (true)
 	{
-		system("cls");
-		b1.print_field();
+		//system("cls");
+		b1.copy_into_buffer();
 		s1.sprite_movement(b1);
+		b1.screen_manager();
 	}
-
-}
-
-
-void sprite_spawn(board& obj)
-{
-	
 }

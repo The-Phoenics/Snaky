@@ -2,10 +2,10 @@
 #include <iostream>
 #include "ctype.h"
 
+
 sprite::sprite(char ch, int posX, int posY, board& obj) : Player(ch), posx(posX), posy(posY)
 {
 	obj.set_player_position(posx, posy, Player);
-	
 }
 
 
@@ -34,24 +34,31 @@ void sprite::sprite_movement(board& obj)
 	{
 		if (obj.get_char_at_board(posx - 1, posy) != '#')
 		{
-			obj.set_player_position(posx, posy, ' ');      
+			obj.set_player_position(posx, posy, ' ');
 			obj.set_player_position(posx - 1, posy, Player);
 			update_sprite_position(posx - 1, posy);
 		}
+		else
+		{
+			obj.move_cursor(-25, 25);
+		}
 	}
 
-	if (temp == 'A')
+	else if (temp == 'A')
 	{
 		if (obj.get_char_at_board(posx, posy - 1) != '#')
 		{
 			obj.set_player_position(posx, posy, ' ');
 			obj.set_player_position(posx, posy - 1, Player);
 			update_sprite_position(posx, posy - 1);
-
+		}
+		else
+		{
+			obj.move_cursor(-25, 25);
 		}
 	}
 
-	if (temp == 'S')
+	else if (temp == 'S')
 	{
 		if (obj.get_char_at_board(posx + 1, posy) != '#')
 		{
@@ -59,9 +66,13 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx + 1, posy, Player);
 			update_sprite_position(posx + 1, posy);
 		}
+		else
+		{
+			obj.move_cursor(-25, 25);
+		}
 	}
 
-	if (temp == 'D')
+	else if (temp == 'D')
 	{
 		if (obj.get_char_at_board(posx, posy + 1) != '#')
 		{
@@ -69,13 +80,22 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx, posy + 1, Player);
 			update_sprite_position(posx, posy + 1);
 		}
+		else
+		{
+			obj.move_cursor(-25, 25);
+		}
+	}
+
+	else
+	{
+		obj.move_cursor(-25, 25);
 	}
 }
 
 
-bool sprite::wall_collision_detection(char wall_character)
+bool sprite::wall_collision_detection(char check_wall_character_variable)
 {
-	if (wall_character == 'W')
+	if (check_wall_character_variable == 'W')
 	{
 		if (get_posx() - 1 == '#')
 		{
@@ -83,7 +103,7 @@ bool sprite::wall_collision_detection(char wall_character)
 		}
 	}
 
-	if (wall_character == 'A')
+	if (check_wall_character_variable == 'A')
 	{
 		if (get_posy() - 1 == '#')
 		{
@@ -91,7 +111,7 @@ bool sprite::wall_collision_detection(char wall_character)
 		}
 	}
 
-	if (wall_character == 'S')
+	if (check_wall_character_variable == 'S')
 	{
 		if (get_posy() + 1 == '#')
 		{
@@ -99,7 +119,7 @@ bool sprite::wall_collision_detection(char wall_character)
 		}
 	}
 
-	if (wall_character == 'D')
+	if (check_wall_character_variable == 'D')
 	{
 		if (get_posx() + 1 == '#')
 		{

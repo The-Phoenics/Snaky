@@ -9,8 +9,16 @@ public:
 	void set_player_position(int x, int y, char player);
 	char get_char_at_board(int x, int y);
 
+	void Update_buffer();
+
+	void screen_manager();
+	void copy_into_buffer();
+
+	void move_cursor(int t_x, int t_y);
+
 private:
 	void initialize_field();
+
 
 protected:
 	
@@ -18,5 +26,7 @@ protected:
 private :
 	int row, column;
 	char play_field[25][50];   // TODO : Fix this, place this inside the constructor and allocate this on heap
+
+	char m_Buffer[25][50];
 
 };
