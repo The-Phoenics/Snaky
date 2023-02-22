@@ -3,7 +3,7 @@
 #include "ctype.h"
 #include <Windows.h>
 
-
+// initializing the sprite(X) at provided positions(posX, posY)
 sprite::sprite(char ch, int posX, int posY, board& obj) : Player(ch), posx(posX), posy(posY)
 {
 	obj.set_player_position(posx, posy, Player);
@@ -86,35 +86,6 @@ void sprite::sprite_movement(board& obj)
 	}
 
 }
-
-
-bool sprite::wall_collision_detection(char check_wall_character_variable)
-{
-	if (check_wall_character_variable == 'W')
-	{
-		if (get_posx() - 1 == '#')
-			return true;			
-	}
-
-	if (check_wall_character_variable == 'A')
-	{
-		if (get_posy() - 1 == '#')
-			return true;
-	}
-
-	if (check_wall_character_variable == 'S')
-	{
-		if (get_posy() + 1 == '#')
-			return true;
-	}
-
-	if (check_wall_character_variable == 'D')
-	{
-		if (get_posx() + 1 == '#')
-			return true;
-	}
-}
-
 
 
 void sprite::set_posx(int px)

@@ -8,7 +8,6 @@ public:
 
     void update_sprite_position(int x, int y);
     void set_player(char ch);
-    bool wall_collision_detection(char wall_character);
     void sprite_movement(board& obj);
 
     void set_posx(int px);
@@ -19,8 +18,8 @@ public:
 
 
 private:
-    char Player;
-    int posx;   // column
-    int posy;   // row
+    char Player; // X
+    int posx;    // column
+    int posy;    // row
 };
 

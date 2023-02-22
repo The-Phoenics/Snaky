@@ -20,13 +20,10 @@ private:
 	void initialize_field();
 
 
-protected:
-	
-
 private :
 	int row, column;
-	char play_field[25][50];   // TODO : Fix this, place this inside the constructor and allocate this on heap
+	char play_field[25][50];   // TODO : Fix this, place this inside the constructor and allocate this on heap.
 
-	char m_Buffer[25][50];
+	char m_Buffer[25][50];     // This is old-buffer. It stores the data of the previous frame of the game.
 
 };
