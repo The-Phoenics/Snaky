@@ -1,6 +1,7 @@
 #include "./headers/sprite.h"
 #include <iostream>
 #include "ctype.h"
+#include <Windows.h>
 
 
 sprite::sprite(char ch, int posX, int posY, board& obj) : Player(ch), posx(posX), posy(posY)
@@ -24,23 +25,33 @@ void sprite::update_sprite_position(int x, int y)
 // movement is done by updating the board
 void sprite::sprite_movement(board& obj)
 {
-	char player_movement_input;
-	std::cin >> player_movement_input;
+	char temp = '0';
 	
-	char temp = toupper(player_movement_input);
-
+	if (GetAsyncKeyState(0x41))
+	{
+		temp = 'A';
+	}
+	if (GetAsyncKeyState(0x57))
+	{
+		temp = 'W';
+	}
+	if (GetAsyncKeyState(0x53))
+	{
+		temp = 'S';
+	}
+	if (GetAsyncKeyState(0x44))
+	{
+		temp = 'D';
+	}
 
 	if (temp == 'W')
 	{
+
 		if (obj.get_char_at_board(posx - 1, posy) != '#')
 		{
 			obj.set_player_position(posx, posy, ' ');
 			obj.set_player_position(posx - 1, posy, Player);
 			update_sprite_position(posx - 1, posy);
-		}
-		else
-		{
-			obj.move_cursor(-25, 25);
 		}
 	}
 
@@ -52,10 +63,6 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx, posy - 1, Player);
 			update_sprite_position(posx, posy - 1);
 		}
-		else
-		{
-			obj.move_cursor(-25, 25);
-		}
 	}
 
 	else if (temp == 'S')
@@ -65,10 +72,6 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx, posy, ' ');
 			obj.set_player_position(posx + 1, posy, Player);
 			update_sprite_position(posx + 1, posy);
-		}
-		else
-		{
-			obj.move_cursor(-25, 25);
 		}
 	}
 
@@ -80,16 +83,8 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx, posy + 1, Player);
 			update_sprite_position(posx, posy + 1);
 		}
-		else
-		{
-			obj.move_cursor(-25, 25);
-		}
 	}
 
-	else
-	{
-		obj.move_cursor(-25, 25);
-	}
 }
 
 
@@ -98,33 +93,25 @@ bool sprite::wall_collision_detection(char check_wall_character_variable)
 	if (check_wall_character_variable == 'W')
 	{
 		if (get_posx() - 1 == '#')
-		{
-			return true;
-		}
+			return true;			
 	}
 
 	if (check_wall_character_variable == 'A')
 	{
 		if (get_posy() - 1 == '#')
-		{
 			return true;
-		}
 	}
 
 	if (check_wall_character_variable == 'S')
 	{
 		if (get_posy() + 1 == '#')
-		{
 			return true;
-		}
 	}
 
 	if (check_wall_character_variable == 'D')
 	{
 		if (get_posx() + 1 == '#')
-		{
 			return true;
-		}
 	}
 }
 

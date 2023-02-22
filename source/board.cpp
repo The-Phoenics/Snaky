@@ -2,6 +2,10 @@
 #include <iostream>
 #include <Windows.h>
 
+#define SUCCESS 0;
+#define FAILURE 1;
+
+
 void board::move_cursor(int t_x, int t_y)
 {
 	COORD COORDINATE;
@@ -33,16 +37,17 @@ void board::screen_manager()
 		for (int j = 0; j < 50; j++)
 		{
 			if (m_Buffer[i][j] == play_field[i][j]) { continue; }
-			
+
 			move_cursor(j, i);
 
 			if (play_field[i][j] == '#') { continue; }
 
+			Sleep(100);
 			std::cout << play_field[i][j];
 
-			move_cursor(-25, 25);
 		}
 }
+
 
 
 void const board::print_field()
