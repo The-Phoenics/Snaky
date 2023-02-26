@@ -8,18 +8,22 @@
 int main()
 {
 
-	board b1(25, 50);
-	sprite s1('X', 20, 15, b1);  // put X at 20,15 index
+	board board(25, 50);
+	sprite sprite('X', 20, 15, board);  // set position of sprite at 20, 15
 
-	b1.copy_into_buffer();
-	b1.print_field();
+	board.print_field();
 
 	while (true)
 	{
-		b1.copy_into_buffer();
-		s1.sprite_movement(b1);
-		b1.screen_manager();
+		board.update();
+		sprite.keyboard_input();
+		if (sprite.sprite_movement(board) == 1) {
+			break;
+		}
+
+		board.render();
 	}
 	std::cout << "\nYOU LOST\n";
+	return 0;
 	std::cin.get();
 }

@@ -6,9 +6,10 @@ class sprite
 public:
     sprite(char ch, int posX, int posY, board& obj);
 
+    void keyboard_input();
     void update_sprite_position(int x, int y);
     void set_player(char ch);
-    void sprite_movement(board& obj);
+    int sprite_movement(board& obj);
 
     void set_posx(int px);
     void set_posy(int py);
@@ -19,6 +20,7 @@ public:
 
 private:
     char Player; // X
+    char m_keystate;
     int posx;    // column
     int posy;    // row
 };

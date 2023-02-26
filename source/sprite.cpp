@@ -21,30 +21,31 @@ void sprite::update_sprite_position(int x, int y)
 	set_posy(y);
 }
 
-
-// movement is done by updating the board
-void sprite::sprite_movement(board& obj)
+void sprite::keyboard_input()
 {
-	char temp = '0';
-	
 	if (GetAsyncKeyState(0x41))
 	{
-		temp = 'A';
+		m_keystate = 'A';
 	}
 	if (GetAsyncKeyState(0x57))
 	{
-		temp = 'W';
+		m_keystate = 'W';
 	}
 	if (GetAsyncKeyState(0x53))
 	{
-		temp = 'S';
+		m_keystate = 'S';
 	}
 	if (GetAsyncKeyState(0x44))
 	{
-		temp = 'D';
+		m_keystate = 'D';
 	}
+}
 
-	if (temp == 'W')
+// movement is done by updating the board
+int sprite::sprite_movement(board& obj)
+{
+
+	if (m_keystate == 'W')
 	{
 
 		if (obj.get_char_at_board(posx - 1, posy) != '#')
@@ -53,9 +54,12 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx - 1, posy, Player);
 			update_sprite_position(posx - 1, posy);
 		}
+		else {
+			return 1;
+		}
 	}
 
-	else if (temp == 'A')
+	else if (m_keystate == 'A')
 	{
 		if (obj.get_char_at_board(posx, posy - 1) != '#')
 		{
@@ -63,9 +67,12 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx, posy - 1, Player);
 			update_sprite_position(posx, posy - 1);
 		}
+		else {
+			return 1;
+		}
 	}
 
-	else if (temp == 'S')
+	else if (m_keystate == 'S')
 	{
 		if (obj.get_char_at_board(posx + 1, posy) != '#')
 		{
@@ -73,9 +80,12 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx + 1, posy, Player);
 			update_sprite_position(posx + 1, posy);
 		}
+		else {
+			return 1;
+		}
 	}
 
-	else if (temp == 'D')
+	else if (m_keystate == 'D')
 	{
 		if (obj.get_char_at_board(posx, posy + 1) != '#')
 		{
@@ -83,8 +93,15 @@ void sprite::sprite_movement(board& obj)
 			obj.set_player_position(posx, posy + 1, Player);
 			update_sprite_position(posx, posy + 1);
 		}
+		else {
+			return 1;
+		}
 	}
 
+	else
+	{
+		return 0;
+	}
 }
 
 

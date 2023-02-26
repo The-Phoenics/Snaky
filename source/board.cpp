@@ -1,9 +1,6 @@
 #include "./headers/board.h"
 #include <iostream>
-#include <Windows.h>
-
-#define SUCCESS 0;
-#define FAILURE 1;
+#include <Windows.h>;
 
 
 void board::move_cursor(int t_x, int t_y)
@@ -15,13 +12,14 @@ void board::move_cursor(int t_x, int t_y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORDINATE);
 }
 
-board::board(int r, int c) : row(r), column(c)  
+board::board(int r, int c) : row(r), column(c)
 {
 	initialize_field();
+	update();
 }
 
 // copy the play_field into m_Buffer
-void board::copy_into_buffer()
+void board::update()
 {
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
@@ -31,7 +29,7 @@ void board::copy_into_buffer()
 }
 
 // compare both buffers and move the cursor
-void board::screen_manager()
+void board::render()
 {
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
@@ -47,7 +45,6 @@ void board::screen_manager()
 
 		}
 }
-
 
 
 void const board::print_field()
