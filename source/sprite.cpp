@@ -21,6 +21,7 @@ void sprite::update_sprite_position(int x, int y)
 	set_posy(y);
 }
 
+// keyboard input ( W A S D )
 void sprite::keyboard_input()
 {
 	if (GetAsyncKeyState(0x41))

@@ -36,11 +36,11 @@ void board::render()
 		{
 			if (m_Buffer[i][j] == play_field[i][j]) { continue; }
 
-			move_cursor(j, i);
+			move_cursor(i, j);
 
 			if (play_field[i][j] == '#') { continue; }
 
-			Sleep(100);
+			Sleep(1000);
 			std::cout << play_field[i][j];
 
 		}
