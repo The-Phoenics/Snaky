@@ -1,10 +1,14 @@
-#pragma once
-#include <stdlib.h>
+#ifndef BOARD_H
+#define BOARD_H
+
+class Sprite;
 
 class board
 {
 public:
 	board(int r, int c);
+	~board() {}
+
 	void const print_field();
 	void set_player_position(int x, int y, char player);
 	char get_char_at_board(int x, int y);
@@ -12,13 +16,11 @@ public:
 	void update();
 	void Update_buffer();
 
-	void render();
-
+	void render(Sprite& sprite);
 	void move_cursor(int t_x, int t_y);
 
 private:
 	void initialize_field();
-
 
 private :
 	int row;
@@ -28,3 +30,4 @@ private :
 	char m_Buffer[25][50];     // This is old-buffer. It stores the data of the previous frame of the game.
 
 };
+#endif

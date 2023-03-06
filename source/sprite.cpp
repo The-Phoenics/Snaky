@@ -1,28 +1,27 @@
 #include "./headers/sprite.h"
+#include "./headers/board.h"
+
 #include <iostream>
-#include "ctype.h"
+#include <ctype.h>
 #include <Windows.h>
 
-// initializing the sprite(X) at provided positions(posX, posY)
-sprite::sprite(char ch, int posX, int posY, board& obj) : Player(ch), posx(posX), posy(posY)
+
+// initializing the snake head at provided positions(posX, posY)
+Sprite::Sprite(char ch, int posX, int posY, board& obj)
+	: Player(ch), posx(posX), posy(posY), m_keystate('L')
 {
 	obj.set_player_position(posx, posy, Player);
 }
 
 
-void sprite::set_player(char ch)
-{
-	Player = ch;
-}
-
-void sprite::update_sprite_position(int x, int y)
+void Sprite::update_sprite_position(int x, int y)
 {
 	set_posx(x);
 	set_posy(y);
 }
 
 // keyboard input ( W A S D )
-void sprite::keyboard_input()
+void Sprite::keyboard_input()
 {
 	if (GetAsyncKeyState(0x41))
 	{
@@ -43,7 +42,7 @@ void sprite::keyboard_input()
 }
 
 // movement is done by updating the board
-int sprite::sprite_movement(board& obj)
+int Sprite::sprite_movement(board& obj)
 {
 
 	if (m_keystate == 'W')
@@ -106,21 +105,14 @@ int sprite::sprite_movement(board& obj)
 }
 
 
-void sprite::set_posx(int px)
-{
-	posx = px;
-}
-void sprite::set_posy(int py)
-{
-	posy = py;
-}
+void Sprite::set_player(char ch) { Player = ch; }
 
-int const sprite::get_posx()
-{
-	return posx;
-}
+void Sprite::set_posx(int px) { posx = px; }
 
-int const sprite::get_posy()
-{
-	return posy;
-}
+void Sprite::set_posy(int py) { posy = py; }
+
+int Sprite::get_posx() const { return posx; }
+
+int Sprite::get_posy() const { return posy; }
+
+char Sprite::get_keystate() const { return m_keystate; }

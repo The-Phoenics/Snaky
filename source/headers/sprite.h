@@ -1,10 +1,13 @@
-#pragma once
-#include "board.h"
+#ifndef SPRITE_H
+#define SPRITE_H
 
-class sprite 
+class board;
+
+class Sprite 
 {
 public:
-    sprite(char ch, int posX, int posY, board& obj);
+    Sprite(char ch, int posX, int posY, board& obj);
+    ~Sprite() {}
 
     void keyboard_input();
     void update_sprite_position(int x, int y);
@@ -14,14 +17,15 @@ public:
     void set_posx(int px);
     void set_posy(int py);
 
-    int const get_posx();
-    int const get_posy();
+    int get_posx() const;
+    int get_posy() const;
+    char get_keystate() const;
 
 
 private:
-    char Player; // X
+    char Player; // O          Snake head
     char m_keystate;
     int posx;    // column
     int posy;    // row
 };
-
+#endif

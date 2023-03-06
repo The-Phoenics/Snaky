@@ -1,7 +1,8 @@
-#include "./headers/board.h"
 #include <iostream>
 #include <Windows.h>;
 
+#include "headers/board.h"
+#include "headers/sprite.h"
 
 void board::move_cursor(int t_x, int t_y)
 {
@@ -29,18 +30,30 @@ void board::update()
 }
 
 // compare both buffers and move the cursor
-void board::render()
+void board::render(Sprite& sprite)
 {
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
 		{
 			if (m_Buffer[i][j] == play_field[i][j]) { continue; }
 
-			move_cursor(i, j);
+			if (sprite.get_keystate() == 'W')
+			{
+				move_cursor(j, i);
+				std::cout << " ";
+			}
+
+			if (sprite.get_keystate() == 'A')
+			{
+				move_cursor(j + 1, i);
+				std::cout << " ";
+			}
+
+			move_cursor(j, i);
 
 			if (play_field[i][j] == '#') { continue; }
 
-			Sleep(1000);
+			Sleep(80);
 			std::cout << play_field[i][j];
 
 		}
