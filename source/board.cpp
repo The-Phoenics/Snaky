@@ -13,14 +13,14 @@ void board::move_cursor(int t_x, int t_y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORDINATE);
 }
 
-board::board(int r, int c) : row(r), column(c)
+board::board(int r, int c) : row(r), column(c), m_fruit('F')
 {
 	initialize_field();
-	update();
+	update_buffer();
 }
 
 // copy the play_field into m_Buffer
-void board::update()
+void board::update_buffer()
 {
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
@@ -35,7 +35,10 @@ void board::render(Sprite& sprite)
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
 		{
-			if (m_Buffer[i][j] == play_field[i][j]) { continue; }
+			if (m_Buffer[i][j] == play_field[i][j])
+			{
+				continue;
+			}
 
 			if (sprite.get_keystate() == 'W')
 			{
@@ -107,21 +110,20 @@ void board::initialize_field()
 	}
 }
 
-void board::set_player_position(int x, int y, char player)
-{
-	play_field[x][y] = player;
-}
-
 char board::get_char_at_board(int x, int y)
 {
 	return play_field[x][y];
 }
 
-void board::Update_buffer()
+void board::set_player_position(int x, int y, char player)
 {
-	for (int i = 0; i < 25; i++)
-		for (int j = 0; j < 50; j++)
-		{
-			memset(m_Buffer, play_field[i][j], 1);
-		}
+	play_field[x][y] = player;
 }
+
+
+void board::set_fruit_position(int fruitX, int fruitY)
+{
+	play_field[fruitX][fruitY] = m_fruit;
+}
+
+char board::get_fruit() { return m_fruit; }

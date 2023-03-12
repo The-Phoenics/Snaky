@@ -21,8 +21,13 @@ public:
     int get_posy() const;
     char get_keystate() const;
 
+    void display_score();
+    void update_score();
+
+
 
 private:
+    int m_score;
     char Player; // O          Snake head
     char m_keystate;
     int posx;    // column

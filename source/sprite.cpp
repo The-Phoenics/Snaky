@@ -8,7 +8,7 @@
 
 // initializing the snake head at provided positions(posX, posY)
 Sprite::Sprite(char ch, int posX, int posY, board& obj)
-	: Player(ch), posx(posX), posy(posY), m_keystate('L')
+	: Player(ch), posx(posX), posy(posY), m_keystate('L'), m_score(0)
 {
 	obj.set_player_position(posx, posy, Player);
 }
@@ -51,10 +51,18 @@ int Sprite::sprite_movement(board& obj)
 		if (obj.get_char_at_board(posx - 1, posy) != '#')
 		{
 			obj.set_player_position(posx, posy, ' ');
+
+			// update score by 5 when Snake's head hits the fruit
+			if (obj.get_char_at_board(posx - 1, posy) == obj.get_fruit())
+			{
+				update_score();
+			}
+
 			obj.set_player_position(posx - 1, posy, Player);
 			update_sprite_position(posx - 1, posy);
 		}
 		else {
+			board::move_cursor(0, 25);
 			return 1;
 		}
 	}
@@ -64,10 +72,18 @@ int Sprite::sprite_movement(board& obj)
 		if (obj.get_char_at_board(posx, posy - 1) != '#')
 		{
 			obj.set_player_position(posx, posy, ' ');
+
+			// update score by 5 when Snake's head hits the fruit
+			if (obj.get_char_at_board(posx, posy - 1) == obj.get_fruit())
+			{
+				update_score();
+			}
+
 			obj.set_player_position(posx, posy - 1, Player);
 			update_sprite_position(posx, posy - 1);
 		}
 		else {
+			board::move_cursor(0, 25);
 			return 1;
 		}
 	}
@@ -77,10 +93,18 @@ int Sprite::sprite_movement(board& obj)
 		if (obj.get_char_at_board(posx + 1, posy) != '#')
 		{
 			obj.set_player_position(posx, posy, ' ');
+
+			// update score by 5 when Snake's head hits the fruit
+			if (obj.get_char_at_board(posx + 1, posy) == obj.get_fruit())
+			{
+				update_score();
+			}
+
 			obj.set_player_position(posx + 1, posy, Player);
 			update_sprite_position(posx + 1, posy);
 		}
 		else {
+			board::move_cursor(0, 25);
 			return 1;
 		}
 	}
@@ -90,10 +114,17 @@ int Sprite::sprite_movement(board& obj)
 		if (obj.get_char_at_board(posx, posy + 1) != '#')
 		{
 			obj.set_player_position(posx, posy, ' ');
+
+			// update score by 5 when Snake's head hits the fruit
+			if (obj.get_char_at_board(posx, posy + 1) == obj.get_fruit())
+			{
+				update_score();
+			}
 			obj.set_player_position(posx, posy + 1, Player);
 			update_sprite_position(posx, posy + 1);
 		}
 		else {
+			board::move_cursor(0, 25);
 			return 1;
 		}
 	}
@@ -104,6 +135,16 @@ int Sprite::sprite_movement(board& obj)
 	}
 }
 
+void Sprite::display_score()
+{
+	board::move_cursor(-20, 1);
+	std::cout << "  SCORE : " << m_score;
+}
+
+void Sprite::update_score()
+{
+	m_score += 5;
+}
 
 void Sprite::set_player(char ch) { Player = ch; }
 

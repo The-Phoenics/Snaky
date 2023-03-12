@@ -16,13 +16,16 @@ int main()
 
 	while (true)
 	{
+		board.set_fruit_position(12, 26);       ////// new
+		sprite.display_score();                 ////// addition today
+
 		sprite.keyboard_input();
 		if (sprite.sprite_movement(board) == 1) {
 			break;
 		}
 
 		board.render(sprite);
-		board.update();
+		board.update_buffer();
 	}
 	std::cout << "\nYOU LOST\n";
 }
