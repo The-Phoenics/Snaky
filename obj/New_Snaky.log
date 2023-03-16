@@ -1,0 +1,12 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(519,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(520,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(534,5): warning MSB8028: The intermediate directory (./obj\) contains files shared from another project (New_Snaky.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  board.cpp
+C:\Users\karan semwal\Desktop\New_Snaky\src\board.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  fruit.cpp
+C:\Users\karan semwal\Desktop\New_Snaky\src\fruit.cpp(44,48): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  main.cpp
+  sprite.cpp
+  Generating Code...
+C:\Users\karan semwal\Desktop\New_Snaky\src\sprite.cpp(141): warning C4715: 'Sprite::sprite_movement': not all control paths return a value
+  New_Snaky.vcxproj -> C:\Users\karan semwal\Desktop\New_Snaky\bin\Snaky.exe
