@@ -4,85 +4,78 @@
 #include <Windows.h>;
 
 #include "./headers/board.h"
-#include "./headers/sprite.h"
+#include "./headers/snake.h"
 #include "./headers/fruit.h"
+#include "./headers/console.h"
 
-void board::move_cursor(int t_x, int t_y)
+Board::Board()
 {
-	COORD COORDINATE;
-	COORDINATE.X = t_x + 25;
-	COORDINATE.Y = t_y;
-
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), COORDINATE);
+	initializeField();
+	updatePrevBuffer();
+	printBoard();
 }
 
-board::board(int r, int c)
-	: row(r), column(c)
-{
-	initialize_field();
-	update_buffer();
-	print_field();
-}
-
-// copy the play_field into m_Buffer
-void board::update_buffer()
+// copy the m_board into m_prevBoardState
+void Board::updatePrevBuffer()
 {
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
 		{
-			m_Buffer[i][j] = play_field[i][j];
+			m_prevBoardState[i][j] = m_board[i][j];
 		}
 }
 
 // compare both buffers and move the cursor
-void board::render(Sprite& sprite)
+void Board::renderSnake(Snake& snakeObj)
 {
 	// Increase game speed as the score increases
-	unsigned int GAME_PACE = 100 - ((sprite.get_score() / 80) * 5);
+	unsigned int GAME_PACE = 100 - ((snakeObj.getScore() / 80) * 5);
 
 	for (int i = 0; i < 25; i++)
 		for (int j = 0; j < 50; j++)
 		{
-			if (m_Buffer[i][j] == play_field[i][j]) { continue; }
-			if (play_field[i][j] == '#') { continue; }
-			if (play_field[i][j] == 'F') { continue; }
+			if (m_prevBoardState[i][j] == m_board[i][j]) { continue; }
+
+			if (m_board[i][j] == '#') { continue; }
+			if (m_board[i][j] == 'F') { continue; }
+			//if (m_board[i][j] == 'x') { continue; }     /////////////
 
 
-			if (sprite.get_keystate() == 'W')
+			if (snakeObj.getSnakeDirection() == 'W')
 			{
-				move_cursor(j, i);
+				console::moveConsoleCursor(j, i);
 				std::cout << " ";
 			}
 
-			if (sprite.get_keystate() == 'A')
+			if (snakeObj.getSnakeDirection() == 'A')
 			{
-				move_cursor(j + 1, i);
+				console::moveConsoleCursor(j + 1, i);
 				std::cout << " ";
 			}
 
-			move_cursor(j, i);
+			console::moveConsoleCursor(j, i);
 
 			Sleep(GAME_PACE);
-			std::cout << play_field[i][j];
+			std::cout << m_board[i][j];
 
 		}
 }
 
 
-void const board::print_field()
+void const Board::printBoard()
 {
-	for (int i = 0; i < row; i++)
+	for (int i = 0; i < ROW; i++)
 	{
 		// blank spaces on the left side of field
-		for (int space = 0; space < column/2; space++)
+		for (int space = 0; space < COLUMN/2; space++)
 		{
 			std::cout << " ";
 		}
 
-		// print field ( board array )
-		for (int j = 0; j < column; j++)
+		// print field ( Board array )
+		for (int j = 0; j < COLUMN; j++)
 		{
-			std::cout << play_field[i][j];
+			std::cout << m_board[i][j];
 		}
 		std::cout << std::endl;
 
@@ -90,39 +83,39 @@ void const board::print_field()
 	}
 }
 
-void board::initialize_field()
+void Board::initializeField()
 {
-	for (int i = 0; i < row; i++)
+	for (int i = 0; i < ROW; i++)
 	{
-		// rows between first and last row
-		if (i > 0 && i < row - 1)
+		// ROWs between first and last ROW
+		if (i > 0 && i < ROW - 1)
 		{
-			play_field[i][0] = '#';
+			m_board[i][0] = '#';
 
-			for (int m = 1; m <= column - 2; m++)
+			for (int m = 1; m <= COLUMN - 2; m++)
 			{
-				play_field[i][m] = ' ';
+				m_board[i][m] = ' ';
 			}
-			play_field[i][column - 1] = '#';
+			m_board[i][COLUMN - 1] = '#';
 		}
 
 		else
 		{
-			for (int j = 0; j < column; j++)
+			for (int j = 0; j < COLUMN; j++)
 			{
-				play_field[i][j] = '#';
+				m_board[i][j] = '#';
 			}
 		}
 	}
 }
 
 
-char board::get_char_at_board(int x, int y)
+char Board::getCharAtBoard(int x, int y)
 {
-	return play_field[x][y];
+	return m_board[x][y];
 }
 
-void board::update_char_at_play_field(int x, int y, char ch)
+void Board::updateCharAtBoard(int x, int y, char ch)
 {
-	play_field[x][y] = ch;
+	m_board[x][y] = ch;
 }

@@ -146,13 +146,15 @@
   <ItemGroup>
     <ClInclude Include="src\headers\board.h" />
     <ClInclude Include="src\headers\fruit.h" />
-    <ClInclude Include="src\headers\sprite.h" />
+    <ClInclude Include="src\headers\snake.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\board.cpp" />
+    <ClCompile Include="src\console.cpp" />
+    <ClCompile Include="src\headers\console.h" />
     <ClCompile Include="src\fruit.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\sprite.cpp" />
+    <ClCompile Include="src\snake.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
