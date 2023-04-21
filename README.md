@@ -8,8 +8,9 @@ Game's current state  [*preview*](https://www.dropbox.com/s/7xdfwz0vqkffehh/game
 ---
 
 ## Build Requirements
-C++ compiler to build the source
+C++ compiler
+Windows api (Windows.h)
 
 ### For Visual Studio
-There is **Snaky.sln** available, Open it and directly run the project in Visual Studio (It is build with Visual Studio 2022)
+There is **Snaky.sln** available, double click it to directly run the project in your Visual Studio (not sure about other versions of Visual Studio)
 
